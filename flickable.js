@@ -11,7 +11,7 @@
         
         var events;
         
-        if ($['os'] && ($.os.ios || $.os.android || $.os.webos)) {
+        if ($['os'] && ($.os.ios || $.os.android || $.os.webos || $.os.blackberry)) {
             events = {
                 start: 'touchstart',
                 move: 'touchmove',
