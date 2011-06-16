@@ -4,8 +4,9 @@
         var element = $($(this)[0]);
         
         settings = $.extend({
-            itemsSelector: 'li',
-            itemWidth: element.width()
+            itemSelector: 'ul',
+            itemWidth: element.width(),
+            offset: 0
         }, options);
         
         var events;
@@ -24,19 +25,13 @@
             };
         }
         
-        var items = element.children(settings.itemsSelector);
+        var item = $(element.find(settings.itemSelector)[0]);
+        var subItemCount = item.find(settings.itemSelector + ' > *').length;
         
-        for (var i=0, j=items.length; i<j; i++) {
-            $(items[i]).css('-webkit-transform', 'translate3d(' + i * settings.itemWidth + 'px, 0, 0)');
-        }
-        setTimeout(function() {
-            for (var i=0, j=items.length; i<j; i++) {
-                $(items[i]).css('-webkit-transition', 'all 0.1s linear');
-            }
-        }, 100);
-        
-        var activeItemIndex = 0;
-        var itemCount = items.length;
+        item.css({
+            '-webkit-transform': 'translate3d(0, 0, 0)',
+            'width': (settings.itemWidth * subItemCount) + 'px'
+        });
         
         var getXY = function(evt) {
             if (evt.touches && evt.touches.length) {
@@ -49,7 +44,7 @@
         $(element).bind(events.start, function(evt) {
             var origin = getXY(evt);
             var current = origin;
-            
+            item.css('-webkit-transition', 'none');
             var reposition = function(evt) {
                 var distanceX = Math.abs(current[0] - origin[0]);
                 var distanceY = Math.abs(current[1] - origin[1]);
@@ -59,9 +54,12 @@
                     current[0] = origin[0];
                 }
                 
-                for (var i=0, j=items.length; i<j; i++) {
-                    $(items[i]).css('-webkit-transform', 'translate3d(' + (current[0] - origin[0] + settings.itemWidth * i) + 'px, 0, 0)');
+                var delta = current[0] - origin[0];
+                if (settings.offset + delta > 0 || settings.offset + delta < -((subItemCount-1) * settings.itemWidth)) {
+                    delta = Math.floor(delta / 2);
                 }
+                
+                item.css('-webkit-transform', 'translate3d(' + (settings.offset + delta) + 'px, 0, 0)');
                 
             };
             
@@ -71,15 +69,20 @@
             });
             
             $(element).bind(events.end, function(evt) {
-                current = getXY(evt);
                 var diff = current[0] - origin[0];
-                if (diff > settings.itemWidth / 2) {
+                item.css('-webkit-transition', 'all 0.1s linear');
+                if (diff > settings.itemWidth / 2 && settings.offset !== 0) {
                     current[0] = origin[0] + settings.itemWidth;
+                    reposition(evt);
+                    settings.offset = settings.offset + settings.itemWidth;
+                } else if (diff < -(settings.itemWidth / 2) && settings.offset != -((subItemCount - 1) * settings.itemWidth)) {
+                    current[0] = origin[0] - settings.itemWidth;
+                    reposition(evt);
+                    settings.offset = settings.offset - settings.itemWidth;
                 } else {
                     current[0] = origin[0];
+                    reposition(evt);
                 }
-                
-                reposition(evt);
                 $(element.unbind(events.move));
                 $(element.unbind(events.end));
             });
