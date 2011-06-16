@@ -71,11 +71,11 @@
             $(element).bind(events.end, function(evt) {
                 var diff = current[0] - origin[0];
                 item.css('-webkit-transition', 'all 0.1s linear');
-                if (diff > settings.itemWidth / 2 && settings.offset !== 0) {
+                if (diff > settings.itemWidth / 3 && settings.offset !== 0) {
                     current[0] = origin[0] + settings.itemWidth;
                     reposition(evt);
                     settings.offset = settings.offset + settings.itemWidth;
-                } else if (diff < -(settings.itemWidth / 2) && settings.offset != -((subItemCount - 1) * settings.itemWidth)) {
+                } else if (diff < -(settings.itemWidth / 3) && settings.offset != -((subItemCount - 1) * settings.itemWidth)) {
                     current[0] = origin[0] - settings.itemWidth;
                     reposition(evt);
                     settings.offset = settings.offset - settings.itemWidth;
