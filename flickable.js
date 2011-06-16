@@ -11,7 +11,7 @@
         
         var events;
         
-        if ($.os.ios || $.os.android || $.os.webos) {
+        if ($['os'] && ($.os.ios || $.os.android || $.os.webos)) {
             events = {
                 start: 'touchstart',
                 move: 'touchmove',
@@ -26,7 +26,7 @@
         }
         
         var item = $(element.find(settings.itemSelector)[0]);
-        var subItemCount = item.find(settings.itemSelector + ' > *').length;
+        var subItemCount = item.children().length;
         
         item.css({
             '-webkit-transform': 'translate3d(0, 0, 0)',
@@ -90,4 +90,4 @@
         });
         
     };
-})(Zepto);
+})(window['Zepto'] || window['jQuery']);
