@@ -70,7 +70,7 @@
             
             $(element).bind(events.end, function(evt) {
                 var diff = current[0] - origin[0];
-                item.css('-webkit-transition', 'all 0.4s ease');
+                item.css('-webkit-transition', '-webkit-transform 0.4s ease');
                 if (diff > settings.itemWidth / 3 && settings.offset !== 0) {
                     current[0] = origin[0] + settings.itemWidth;
                     reposition(evt);
