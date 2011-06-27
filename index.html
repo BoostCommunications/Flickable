@@ -3,15 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>untitled</title>
-    <script src="zepto.min.js" type="text/javascript"></script>
     <script src="flickable.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('.flickable').flickable({
-                itemWidth: 322
-            });
-        });
-    </script>
     <style type="text/css" media="screen">
         .flickable {
             position: relative;
@@ -48,6 +40,20 @@
             <li>tre</li>
         </ul>
     </div>
-
+    
+    <div class="flickable">
+        <ul>
+            <li>en</li>
+            <li>to</li>
+            <li>tre</li>
+        </ul>
+    </div>
+    
+    <script type="text/javascript">
+        Flickable('.flickable', {
+            itemWidth: 322
+        });
+    </script>
+    
 </body>
 </html>
