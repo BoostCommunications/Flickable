@@ -7,7 +7,8 @@ var Flickable = function(elementSelector, options) {
             itemSelector: 'ul',
             itemWidth: screen.width,
             offset: 0
-        };
+        },
+        touchesInUse = 0;
     
     // Extend settings with options from parameter
     if (options) {
@@ -33,6 +34,15 @@ var Flickable = function(elementSelector, options) {
         };
     }
     
+    // Get X and Y value from a touch or mouse event
+    var getXY = function(evt) {
+        if (evt.touches && evt.touches.length) {
+            return [evt.touches[currentTouch].clientX, evt.touches[currentTouch].clientY];
+        } else {
+            return [evt.clientX, evt.clientY];
+        }
+    };
+    
     // Set up flickables for all matched elements
     for (i = 0, j = elements.length; i < j; i++) {
         (function() {
@@ -40,7 +50,8 @@ var Flickable = function(elementSelector, options) {
             var element = elements[i],
                 item = element.querySelector(settings.itemSelector),
                 subItemCount = item.children.length,
-                offset = settings.offset;
+                offset = settings.offset,
+                currentTouch = 0;
             
             // Set up default styles
             item.style.WebkitTransform = 'translate3d(' + offset + 'px, 0, 0)';
@@ -49,17 +60,12 @@ var Flickable = function(elementSelector, options) {
             item.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
             item.style.width = (settings.itemWidth * subItemCount) + 'px';
             
-            // Get X and Y value from a touch or mouse event
-            var getXY = function(evt) {
-                if (evt.touches && evt.touches.length) {
-                    return [evt.touches[0].clientX, evt.touches[0].clientY];
-                } else {
-                    return [evt.clientX, evt.clientY];
-                }
-            };
-            
-            // Set up listener
+            // Set up touch listener
             element.addEventListener(events.start, function(evt) {
+                
+                // Set up which touch to use (if multiple)
+                touchesInUse++;
+                currentTouch = touchesInUse - 1;
                 
                 // Get origin position
                 var origin = getXY(evt);
@@ -125,6 +131,8 @@ var Flickable = function(elementSelector, options) {
                         current[0] = origin[0];
                         reposition(evt);
                     }
+                    
+                    touchesInUse--;
                     
                     // Remove drag and end event listeners
                     element.removeEventListener(events.move, moveEvent, false);
