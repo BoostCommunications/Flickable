@@ -5,10 +5,9 @@
         
         settings = $.extend({
             itemSelector: 'ul',
-            itemWidth: element.width(),
+            itemWidth: screen.width,
             offset: 0
         }, options);
-        
         var events;
         
         if ($['os'] && ($.os.ios || $.os.android || $.os.webos || $.os.blackberry)) {
@@ -71,11 +70,11 @@
             $(element).bind(events.end, function(evt) {
                 var diff = current[0] - origin[0];
                 item.css('-webkit-transition', '-webkit-transform 0.4s ease');
-                if (diff > settings.itemWidth / 3 && settings.offset !== 0) {
+                if (diff > settings.itemWidth / 4 && settings.offset !== 0) {
                     current[0] = origin[0] + settings.itemWidth;
                     reposition(evt);
                     settings.offset = settings.offset + settings.itemWidth;
-                } else if (diff < -(settings.itemWidth / 3) && settings.offset != -((subItemCount - 1) * settings.itemWidth)) {
+                } else if (diff < -(settings.itemWidth / 4) && settings.offset != -((subItemCount - 1) * settings.itemWidth)) {
                     current[0] = origin[0] - settings.itemWidth;
                     reposition(evt);
                     settings.offset = settings.offset - settings.itemWidth;
@@ -83,8 +82,8 @@
                     current[0] = origin[0];
                     reposition(evt);
                 }
-                $(element.unbind(events.move));
-                $(element.unbind(events.end));
+                $(element).unbind(events.move);
+                $(element).unbind(events.end);
             });
             
         });
