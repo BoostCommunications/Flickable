@@ -34,15 +34,6 @@ var Flickable = function(elementSelector, options) {
         };
     }
     
-    // Get X and Y value from a touch or mouse event
-    var getXY = function(evt) {
-        if (evt.touches && evt.touches.length) {
-            return [evt.touches[currentTouch].clientX, evt.touches[currentTouch].clientY];
-        } else {
-            return [evt.clientX, evt.clientY];
-        }
-    };
-    
     // Set up flickables for all matched elements
     for (i = 0, j = elements.length; i < j; i++) {
         (function() {
@@ -59,6 +50,15 @@ var Flickable = function(elementSelector, options) {
             item.style.OTransform = 'translateX(' + offset + 'px)';
             item.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
             item.style.width = (settings.itemWidth * subItemCount) + 'px';
+            
+            // Get X and Y value from a touch or mouse event
+            var getXY = function(evt) {
+                if (evt.touches && evt.touches.length) {
+                    return [evt.touches[currentTouch].clientX, evt.touches[currentTouch].clientY];
+                } else {
+                    return [evt.clientX, evt.clientY];
+                }
+            };
             
             // Set up touch listener
             element.addEventListener(events.start, function(evt) {
