@@ -1,7 +1,7 @@
 Flickable
 =========
 
-Flickable is a simple Javascript-thingy that creates iOS-style flickable galleries.
+Flickable is a simple Javascript library for creating iOS-style flickable galleries on touch-enabled devices.
 
 Demo
 ----
@@ -11,7 +11,7 @@ A demo can be viewed at [flickable.aurlien.net](http://flickable.aurlien.net).
 Usage
 -----
 
-The library provides a single function, Flickable, which takes two arguments:
+The library provides a single function, `Flickable`, which takes two arguments:
 
 1. A selector for the flickables
 2. A settings object
@@ -39,7 +39,7 @@ Settings reference
 ------------------
 
 - `itemWidth`: The width of each item, including margin, padding and border. Should always be provided. **Default:** `screen.width`
-- `offset`: Which item to start at. **Default:** 0
+- `offset`: Which item to start at. **Default:** `0`
 - `enableMouseEvents`: Whether to enable mouse events (useful for testing). **Default:** `false`
 - `showIndicators`: Whether to show indicators for which item is selected. **Default:** `true`
 - `indicatorClass`: The class name for the indicator wrapper element. **Default:** `'flickableIndicator'`
