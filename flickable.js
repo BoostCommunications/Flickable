@@ -6,9 +6,15 @@ var Flickable = function(elementSelector, options) {
         settings = {
             itemSelector: 'ul',
             itemWidth: screen.width,
-            offset: 0
+            offset: 0,
+            enableMouseEvents: false,
+            showIndicators: true,
+            indicatorClass: 'flickableIndicator',
+            activeIndicatorClass: 'flickableIndicatorActive'
         },
         touchesInUse = 0;
+    
+    settings.offset = -settings.offset;
     
     // Extend settings with options from parameter
     if (options) {
@@ -20,17 +26,17 @@ var Flickable = function(elementSelector, options) {
     }
     
     // Detect if current device supports touch events, otherwise use mouse events
-    if ('ontouchstart' in document.createElement('div')) {
-        events = {
-            start: 'touchstart',
-            move: 'touchmove',
-            end: 'touchend'
-        };
-    } else {
+    if (settings.enableMouseEvents && ! ('ontouchstart' in document.createElement('div'))) {
         events = {
             start: 'mousedown',
             move: 'mousemove',
             end: 'mouseup'
+        };
+    } else {
+        events = {
+            start: 'touchstart',
+            move: 'touchmove',
+            end: 'touchend'
         };
     }
     
@@ -43,6 +49,21 @@ var Flickable = function(elementSelector, options) {
                 subItemCount = item.children.length,
                 offset = settings.offset,
                 currentTouch = 0;
+            
+            if (settings.showIndicators) {
+                var indicator = document.createElement('div'),
+                    indicatorSub = document.createElement('div'),
+                    k;
+                indicator.setAttribute('class', settings.indicatorClass);
+                
+                for (k = 0; k < subItemCount; k++) {
+                    indicatorSub.appendChild(document.createElement('span'));
+                }
+            
+                indicator.appendChild(indicatorSub);
+                indicatorSub.querySelectorAll('span')[offset/settings.itemWidth].setAttribute('class', settings.activeIndicatorClass);
+                element.parentNode.insertBefore(indicator, element.nextSibling);
+            }
             
             // Set up default styles
             item.style.WebkitTransform = 'translate3d(' + offset + 'px, 0, 0)';
@@ -130,6 +151,18 @@ var Flickable = function(elementSelector, options) {
                     } else {
                         current[0] = origin[0];
                         reposition(evt);
+                    }
+                    
+                    if (settings.showIndicators) {
+                        var currentSlide = Math.floor(Math.abs(offset/settings.itemWidth)),
+                            indicators   = indicatorSub.querySelectorAll('span');
+                        if (indicators[currentSlide - 1]) {
+                            indicators[currentSlide - 1].removeAttribute('class');
+                        }
+                        if (indicators[currentSlide + 1]) {
+                            indicators[currentSlide + 1].removeAttribute('class');
+                        }
+                        indicators[currentSlide].setAttribute('class', settings.activeIndicatorClass);
                     }
                     
                     touchesInUse--;
