@@ -31,12 +31,23 @@
             width: 300px;
             height: 150px;
             border: 10px solid green;
+            text-align: center;
+            line-height: 150px;
         }
-        .flickable li+li {
+        .flickable li:nth-child(6n+2) {
             border: 10px solid blue;
         }
-        .flickable li+li+li {
+        .flickable li:nth-child(6n+3) {
             border: 10px solid red;
+        }
+        .flickable li:nth-child(6n+4) {
+            border: 10px solid yellow;
+        }
+        .flickable li:nth-child(6n+5) {
+            border: 10px solid teal;
+        }
+        .flickable li:nth-child(6n) {
+            border: 10px solid black;
         }
         .flickableIndicator {
             width: 320px;
@@ -66,6 +77,9 @@
             <li>en</li>
             <li>to</li>
             <li>tre</li>
+            <li>fire</li>
+            <li>fem</li>
+            <li>seks</li>
         </ul>
     </div>
     
@@ -74,6 +88,7 @@
             <li>en</li>
             <li>to</li>
             <li>tre</li>
+            <li>fire</li>
         </ul>
     </div>
     
