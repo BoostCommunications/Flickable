@@ -5,34 +5,19 @@
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
     <title>Flickable</title>
     <script src="flickable.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="flickable.css" type="text/css" media="screen">
     <style type="text/css" media="screen">
         body {
             margin: 0;
             padding: 0;
-        }
-        .flickable {
-            position: relative;
-            width: 320px;
-            height: 170px;
-            overflow: hidden;
-            clear: both;
-        }
-        .flickable ul {
-            display: block;
-            position: absolute;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+            font-family: helvetica, arial, sans-serif;
         }
         .flickable li {
-            display: block;
-            float: left;
-            margin: 0;
             width: 300px;
-            height: 150px;
+            height: 180px;
             border: 10px solid green;
             text-align: center;
-            line-height: 150px;
+            line-height: 180px;
         }
         .flickable li:nth-child(6n+2) {
             border: 10px solid blue;
@@ -49,46 +34,27 @@
         .flickable li:nth-child(6n) {
             border: 10px solid black;
         }
-        .flickableIndicator {
-            width: 320px;
-        }
-        .flickableIndicator div {
-            margin: 0 auto;
-            text-align: center;
-            line-height: 12px;
-        }
-        .flickableIndicator div span {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 3px;
-            margin: 2px 4px;
-            background-color: #ccc;
-        }
-        .flickableIndicator span.flickableIndicatorActive {
-            background-color: #666;
-        }
     </style>
 </head>
 <body>
 
     <div class="flickable">
         <ul>
-            <li>en</li>
-            <li>to</li>
-            <li>tre</li>
-            <li>fire</li>
-            <li>fem</li>
-            <li>seks</li>
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+            <li>Four</li>
+            <li>Five</li>
+            <li>Six</li>
         </ul>
     </div>
     
     <div class="flickable">
         <ul>
-            <li>en</li>
-            <li>to</li>
-            <li>tre</li>
-            <li>fire</li>
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+            <li>Four</li>
         </ul>
     </div>
     
@@ -98,6 +64,8 @@
             enableMouseEvents: true
         });
     </script>
+    
+    <p><a href="https://github.com/arnemart/Flickable">View code on Github</a></p>
     
 </body>
 </html>

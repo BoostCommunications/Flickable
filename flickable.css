@@ -1,0 +1,49 @@
+/* Flickable wrapper */
+.flickable {
+    position: relative;
+    width: 320px;
+    height: 200px;
+    overflow: hidden;
+    clear: both;
+}
+
+/* Scrolling container */
+.flickable > * {
+    display: block;
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Flickable items */
+.flickable > * > * {
+    width: 320px;
+    height: 200px;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+/* Item indicator wrapper */
+.flickableIndicator {
+    width: 320px;
+    text-align: center;
+    line-height: 12px;
+}
+
+/* Item indicator */
+.flickableIndicator span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    margin: 2px 4px;
+    background-color: #ccc;
+}
+
+/* Active item indicator */
+.flickableIndicator span.flickableIndicatorActive {
+    background-color: #666;
+}

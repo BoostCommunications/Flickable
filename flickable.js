@@ -4,7 +4,6 @@ var Flickable = function(elementSelector, options) {
         i, j,
         events,
         settings = {
-            itemSelector: 'ul',
             itemWidth: screen.width,
             offset: 0,
             enableMouseEvents: false,
@@ -13,8 +12,6 @@ var Flickable = function(elementSelector, options) {
             activeIndicatorClass: 'flickableIndicatorActive'
         },
         touchesInUse = 0;
-    
-    settings.offset = -settings.offset;
     
     // Extend settings with options from parameter
     if (options) {
@@ -45,23 +42,21 @@ var Flickable = function(elementSelector, options) {
         (function() {
             
             var element = elements[i],
-                item = element.querySelector(settings.itemSelector),
+                item = element.children[0],
                 subItemCount = item.children.length,
-                offset = settings.offset,
+                offset = -(settings.offset * settings.itemWidth),
                 currentTouch = 0;
             
             if (settings.showIndicators) {
                 var indicator = document.createElement('div'),
-                    indicatorSub = document.createElement('div'),
                     k;
                 indicator.setAttribute('class', settings.indicatorClass);
                 
                 for (k = 0; k < subItemCount; k++) {
-                    indicatorSub.appendChild(document.createElement('span'));
+                    indicator.appendChild(document.createElement('span'));
                 }
-            
-                indicator.appendChild(indicatorSub);
-                indicatorSub.querySelectorAll('span')[offset/settings.itemWidth].setAttribute('class', settings.activeIndicatorClass);
+                
+                indicator.querySelectorAll('span')[settings.offset].setAttribute('class', settings.activeIndicatorClass);
                 element.parentNode.insertBefore(indicator, element.nextSibling);
             }
             
@@ -155,7 +150,7 @@ var Flickable = function(elementSelector, options) {
                     
                     if (settings.showIndicators) {
                         var currentSlide = Math.floor(Math.abs(offset/settings.itemWidth)),
-                            indicators   = indicatorSub.querySelectorAll('span');
+                            indicators   = indicator.querySelectorAll('span');
                         if (indicators[currentSlide - 1]) {
                             indicators[currentSlide - 1].removeAttribute('class');
                         }
