@@ -44,3 +44,4 @@ Settings reference
 - `showIndicators`: Whether to show indicators for which item is selected. **Default:** `true`
 - `indicatorClass`: The class name for the indicator wrapper element. **Default:** `'flickableIndicator'`
 - `activeIndicatorClass`: The class name for the active indicator element. **Default:** `'flickableIndicatorActive'`
+- `callback`: A function to be called each time the slide changes. The function will be passed the slide number (zero-indexed) as a parameter.

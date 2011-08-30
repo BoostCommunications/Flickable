@@ -62,7 +62,10 @@
     <script type="text/javascript">
         Flickable('.flickable', {
             itemWidth: 320,
-            enableMouseEvents: true
+            enableMouseEvents: true,
+            callback: function(n) {
+                console.log(n);
+            }
         });
     </script>
     
