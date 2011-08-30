@@ -148,9 +148,16 @@ var Flickable = function(elementSelector, options) {
                         reposition(evt);
                     }
                     
+                    var currentSlide = Math.floor(Math.abs(offset/settings.itemWidth));
+                    
+                    if (settings.callback) {
+                        setTimeout(function() {
+                            settings.callback(currentSlide);
+                        }, 200);
+                    }
+                    
                     if (settings.showIndicators) {
-                        var currentSlide = Math.floor(Math.abs(offset/settings.itemWidth)),
-                            indicators = indicator.querySelectorAll('span');
+                        var indicators = indicator.querySelectorAll('span');
                         if (indicators[currentSlide - 1]) {
                             indicators[currentSlide - 1].removeAttribute('class');
                         }
