@@ -2,6 +2,7 @@
 .flickable {
     overflow: hidden;
     clear: both;
+    position: relative;
 }
 
 /* Scrolling container */

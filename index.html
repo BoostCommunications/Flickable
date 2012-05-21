@@ -61,15 +61,17 @@
     
     <script type="text/javascript">
         Flickable('.flickable', {
-            itemWidth: 320,
+            width: 320,
             enableMouseEvents: true,
             callback: function(n) {
-                console.log(n);
+                if (window.console) {
+                    console.log(n);
+                }
             }
         });
     </script>
     
-    <p><a href="https://github.com/arnemart/Flickable">View code on Github</a></p>
+    <p><a href="https://github.com/BoostCommunications/Flickable">View code on Github</a></p>
     
 </body>
 </html>
