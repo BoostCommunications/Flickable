@@ -17,19 +17,15 @@ var Flickable = function(elementSelector, options) {
             nextButtonClass: 'nextSlideButton',
             prevButtonClass: 'prevSlideButton',
             nextButtonText: 'Next',
-            prevButtonText: 'Previous'
+            prevButtonText: 'Previous',
+            orientationEvent: 'orientationchange'
         },
-        orientationEvent = 'resize',
         orientationTimeout;
 
     if (elementMatches[1] === '.') {
         elements = document.getElementsByClassName(elementMatches[2]);
     } else if (elementMatches[1] === '#') {
         elements = [document.getElementsById(elementMatches[2])];
-    }
-
-    if ('onorientationchange' in window) {
-        orientationEvent = 'orientationchange';
     }
 
     // Extend settings with options from parameter
@@ -39,6 +35,16 @@ var Flickable = function(elementSelector, options) {
                 settings[i] = options[i];
             }
         }
+    }
+
+    // 'onorientationchange' could be disabled by passing 'resize' option. 
+    // Default option is 'orientationchange' if supported by browser.
+    var orientationEvent;
+    if(settings.orientationEvent === 'orientationchange'
+        && 'onorientationchange' in window) {
+            orientationEvent = 'orientationchange';
+    } else {
+        orientationEvent = 'resize';
     }
 
     if (settings.itemWidth) {
