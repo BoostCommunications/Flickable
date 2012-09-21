@@ -48,5 +48,6 @@ Settings reference
 - `indicatorClass`: The class name for the indicator wrapper element. **Default:** `'flickableIndicator'`
 - `activeIndicatorClass`: The class name for the active indicator element. **Default:** `'flickableIndicatorActive'`
 - `callback`: A function to be called each time the slide changes. The function will be passed the slide number (zero-indexed) as a parameter.
+- `widthCallback`: A function to be called each time the orientation changes. The function should return new images width.
 
 _Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php_
