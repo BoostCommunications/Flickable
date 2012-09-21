@@ -17,7 +17,8 @@ var Flickable = function(elementSelector, options) {
             nextButtonClass: 'nextSlideButton',
             prevButtonClass: 'prevSlideButton',
             nextButtonText: 'Next',
-            prevButtonText: 'Previous'
+            prevButtonText: 'Previous',
+            timeInterval: 0
         },
         orientationEvent = 'resize',
         orientationTimeout;
@@ -222,6 +223,19 @@ var Flickable = function(elementSelector, options) {
                         snapToCurrentSlide(true);
                     }));
                 }
+
+                // auto-rotation if wanted
+                if (options.timeInterval > 0)
+                {
+                    setInterval(function() {
+                            currentSlide = currentSlide + 1;
+                            if (!subItems[currentSlide]) {
+                                currentSlide = 0;
+                            }
+                            snapToCurrentSlide(true);
+                        }, options.timeInterval * 1000
+                    );
+                };
 
                 // Get X and Y value from a touch or mouse event
                 var getXY = function(evt) {
