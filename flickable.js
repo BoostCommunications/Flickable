@@ -56,7 +56,7 @@ var Flickable = function(elementSelector, options) {
 
     if (settings.width == 'screen') {
         settings.widthScreen = true;
-        settings.width = window.innerWidth;
+        settings.width = getWidth();
         window.addEventListener(orientationEvent, function(e) {
             clearTimeout(orientationTimeout);
             orientationTimeout = setTimeout(function() {
