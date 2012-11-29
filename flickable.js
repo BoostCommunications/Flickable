@@ -20,7 +20,7 @@ var Flickable = function(elementSelector, options) {
             prevButtonText: 'Previous',
             widthCallback: function() {
                 return window.innerWidth;
-            },
+            }
         },
         orientationEvent = 'resize',
         orientationTimeout;
