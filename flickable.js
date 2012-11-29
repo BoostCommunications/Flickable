@@ -18,7 +18,9 @@ var Flickable = function(elementSelector, options) {
             prevButtonClass: 'prevSlideButton',
             nextButtonText: 'Next',
             prevButtonText: 'Previous',
-            widthCallback: null
+            widthCallback: function() {
+                return window.innerWidth;
+            },
         },
         orientationEvent = 'resize',
         orientationTimeout;
@@ -46,21 +48,13 @@ var Flickable = function(elementSelector, options) {
         settings.width = settings.itemWidth;
     }
 
-    if(settings.widthCallback === null) {
-        var getWidth = function() {
-            return window.innerWidth;
-        }
-    } else {
-        var getWidth = settings.widthCallback;
-    }
-
     if (settings.width == 'screen') {
         settings.widthScreen = true;
-        settings.width = getWidth();
+        settings.width = settings.widthCallback();
         window.addEventListener(orientationEvent, function(e) {
             clearTimeout(orientationTimeout);
             orientationTimeout = setTimeout(function() {
-                settings.width = getWidth();
+                settings.width = settings.widthCallback();
             }, 200);
         });
     }
