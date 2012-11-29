@@ -25,7 +25,7 @@ var Flickable = function(elementSelector, options) {
     if (elementMatches[1] === '.') {
         elements = document.getElementsByClassName(elementMatches[2]);
     } else if (elementMatches[1] === '#') {
-        elements = [document.getElementsById(elementMatches[2])];
+        elements = [document.getElementById(elementMatches[2])];
     }
 
     if ('onorientationchange' in window) {
