@@ -22,13 +22,13 @@
 }
 
 /* Item indicator wrapper */
-.flickableIndicator {
+.flickableIndicatorDots {
     text-align: center;
     line-height: 12px;
 }
 
 /* Item indicator */
-.flickableIndicator span {
+.flickableIndicatorDots span {
     display: inline-block;
     width: 6px;
     height: 6px;
@@ -38,6 +38,29 @@
 }
 
 /* Active item indicator */
-.flickableIndicator span.flickableIndicatorActive {
+.flickableIndicatorDots span.flickableIndicatorActive {
     background-color: #666;
+}
+
+/* Item indicator wrapper (numbers) */
+.flickableIndicatorNumbers {
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Item indicator */
+.flickableIndicatorNumbers span {
+     display: inline;
+}
+
+/* Caption display */
+.flickableIndicatorNumbers div.caption {
+    float: left;
+}
+
+/* Number display */
+.flickableIndicatorNumbers div.number {
+    float: right;
 }

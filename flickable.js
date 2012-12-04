@@ -10,8 +10,10 @@ var Flickable = function(elementSelector, options) {
             offset: 0,
             enableMouseEvents: false,
             showIndicators: true,
+            showNumbers: false,			
             showButtons: false,
-            indicatorClass: 'flickableIndicator',
+            indicatorClass: 'flickableIndicatorDots',
+            numberIndicatorClass: 'flickableIndicatorNumbers',
             activeIndicatorClass: 'flickableIndicatorActive',
             slideshowNavigationClass: 'slideshowNavigation',
             nextButtonClass: 'nextSlideButton',
@@ -124,7 +126,12 @@ var Flickable = function(elementSelector, options) {
 
             if (settings.showIndicators) {
                 var indicator = document.createElement('div');
-                indicator.setAttribute('class', settings.indicatorClass);
+				
+                if (settings.showNumbers) {
+                    indicator.setAttribute('class', settings.numberIndicatorClass);
+                } else {
+                    indicator.setAttribute('class', settings.indicatorClass);
+                }
 
                 for (k = 0; k < subItemCount; k++) {
                     indicator.appendChild(document.createElement('span'));
@@ -140,8 +147,13 @@ var Flickable = function(elementSelector, options) {
                     for (var k = 0, l = indicators.length; k < l; k++) {
                         if (k !== currentSlide) {
                             indicators[k].removeAttribute('class');
+                            indicators[k].innerHTML = "";							
                         } else {
                             indicators[k].setAttribute('class', settings.activeIndicatorClass);
+                            if (settings.showNumbers) {
+                                var k1 = k + 1;
+                                indicators[k].innerHTML = '<div class="caption">' + subItems[k].getAttribute('data-caption') + '</div><div class="number">' + ' ' + k1 + ' / ' + indicators.length + '</div>';
+                            }
                         }
                     }
                 }
