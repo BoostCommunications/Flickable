@@ -42,10 +42,12 @@ Settings reference
 - `offset`: Which item to start at. **Default:** `0`
 - `enableMouseEvents`: Whether to enable mouse events (useful for testing). **Default:** `false`
 - `showIndicators`: Whether to show indicators for which item is selected. **Default:** `true`
+- `showNumbers`: Whether to show indicators in form of numbers like "2/23". **Default:** `false`. Supports caption display as well, the caption must be provided in `data-caption` attribute of `<li>` tag.
 - `showButtons`: Whether to show next/previous-buttons for devices that support touch events. **Default:** `false`
 - `nextButtonText`: Text for next-button. **Default:** `'Next'`
 - `prevButtonText`: Text for previous-button. **Default:** `'Previous'`
-- `indicatorClass`: The class name for the indicator wrapper element. **Default:** `'flickableIndicator'`
+- `indicatorClass`: The class name for the dots indicator wrapper element. **Default:** `'flickableIndicatorDots'`
+- `numberIndicatorClass`: The class name for the numbered indicator wrapper element. **Default:** `'flickableIndicatorNumbers'`
 - `activeIndicatorClass`: The class name for the active indicator element. **Default:** `'flickableIndicatorActive'`
 - `callback`: A function to be called each time the slide changes. The function will be passed the slide number (zero-indexed) as a parameter.
 
