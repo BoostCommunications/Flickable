@@ -10,9 +10,9 @@ var Flickable = function(elementSelector, options) {
             offset: 0,
             enableMouseEvents: false,
             showIndicators: true,
-            showNumbers: false,			
+            showNumbers: false,
             showButtons: false,
-            indicatorClass: 'flickableIndicatorDots',
+            dotsIndicatorClass: 'flickableIndicatorDots',
             numberIndicatorClass: 'flickableIndicatorNumbers',
             activeIndicatorClass: 'flickableIndicatorActive',
             slideshowNavigationClass: 'slideshowNavigation',
@@ -126,11 +126,11 @@ var Flickable = function(elementSelector, options) {
 
             if (settings.showIndicators) {
                 var indicator = document.createElement('div');
-				
+
                 if (settings.showNumbers) {
                     indicator.setAttribute('class', settings.numberIndicatorClass);
                 } else {
-                    indicator.setAttribute('class', settings.indicatorClass);
+                    indicator.setAttribute('class', settings.dotsIndicatorClass);
                 }
 
                 for (k = 0; k < subItemCount; k++) {
@@ -147,7 +147,7 @@ var Flickable = function(elementSelector, options) {
                     for (var k = 0, l = indicators.length; k < l; k++) {
                         if (k !== currentSlide) {
                             indicators[k].removeAttribute('class');
-                            indicators[k].innerHTML = "";							
+                            indicators[k].innerHTML = "";
                         } else {
                             indicators[k].setAttribute('class', settings.activeIndicatorClass);
                             if (settings.showNumbers) {
